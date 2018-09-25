@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Survey Form Results</title>
+</head>
+
+<body>
+    <div>
+    <p>Thanks for submitting this form! You have submitted this form {{count}} times now.</p>
+    </div>
+
+    <div>
+    <h1>Submitted Information</h1>
+
+    <table>
+        <tr>
+            <th>Name:</th>
+            <td> {{ name }} </td>
+        </tr>
+
+        <tr>
+            <th>Dojo Location:</th>
+            <td> {{ location }} </td>
+        </tr>
+
+        <tr>
+            <th>Favorite Language:</th>
+            <td> {{ language }} </td>
+        </tr>
+
+        <tr>
+            <th>Comment:</th>
+            <td> {{ comment }} </td>
+        </tr>
+        
+</table>
+    </div>
+    
+</body>
+</html>

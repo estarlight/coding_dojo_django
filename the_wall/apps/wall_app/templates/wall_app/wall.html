@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>The Wall</title>
+
+        <!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+</head>
+<body>
+<div class="container">
+
+    <div class="row">
+        <div class="col s3">
+            <h5>Coding Dojo Wall</h5>
+        </div>
+        <div class="col s6"></div>   
+        <div class="col s3">
+            <p>Welcome {{user.first_name}}    <a href="/logoff">Log Off</a></p>
+        </div>   
+    </div>
+
+    {% if messages %}
+    <ul class="messages">
+    {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+
+
+    <div class="row">
+        <form class="col s12" name="messages" action="/post/message>" method="post">
+                {% csrf_token %}
+        <div class="row">
+            <div class="input-field col s12">
+            <textarea name="message" class="materialize-textarea"></textarea>
+            <label for="textarea1">Enter your message...</label>
+            </div>
+            <input type="hidden" name="type" value="message">
+            <button class="btn waves-effect waves-light" type="submit" name="action">Post a Message
+            </button>
+        </div>
+        </form>
+  
+
+    <div class="row">
+
+        {% for message in wall_messages %}
+        <ul class="collection col s12">
+        
+            <li class="collection-item">
+                <form action="/delete/{{message.id}}" method="post">
+                    {% csrf_token %}
+                <p>{{ message.user.first_name }} {{ message.user.last_name }} -- {{message.created_at}}</p>
+                <p>{{ message.content }}</p>
+                <input type="hidden" name="user" value = "{{message.user.id}}">
+                <button class="btn waves-effect waves-light" type="submit" name="action">Delete Message
+                </button>
+                </form>
+            </li>
+         
+            <div class="col s10 offset-s2 collection">
+            <form name="comment" action="/post/{{message.id}}" method="post">
+                {% csrf_token %}
+    
+            <textarea name="comment" class="materialize-textarea"></textarea>
+            <label for="textarea1">Enter your comment...</label>
+            
+            <input type="hidden" name="type" value=comment>
+            
+    
+            <button class="btn waves-effect waves-light" type="submit" name="action">Post a Comment</button>
+ 
+            </form>
+            
+            {% for c in message.message_comment.all %}
+            <li class="collection-item"></li>
+                <p>{{ c.user.first_name }} {{ c.user.last_name }} -- {{ c.created_at }}</p>
+                <p>{{ c.content }}</p>
+            </li>
+        {% endfor%}
+            </div>
+        </ul>
+        {% endfor %}
+        
+           
+   
+    </div>
+
+
+
+
+
+</div>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Sports Leagues</title>
+	</head>
+	<body>
+
+		<h1>Atlantic Soccer Conference</h1>
+		{% for c in atl_conf %}
+			<li>{{ c.team_name }} -- {{ c.league.name}} </li>
+		{% endfor %}
+
+		<h1>Current Boston Penguins</h1>
+		{% for c in current_penguins %}
+			<li>{{ c.first_name }} {{ c.last_name}} </li>
+		{% endfor %}
+
+		<h1>Current International Collegiate</h1>
+		{% for c in current_collegiate %}
+			<li>{{ c.first_name }} {{ c.last_name}} -- {{c.curr_team.team_name}}, {{c.curr_team.league.name}}</li>
+		{% endfor %}
+
+		<h1>Last Name Lopez</h1>
+		{% for c in current_amfootball_lopez %}
+			<li>{{ c.first_name }} {{ c.last_name}} </li>
+		{% endfor %}
+
+		<h1>All Football players</h1>
+		{% for c in all_football %}
+			<li>{{ c.first_name }} {{ c.last_name}} -- {{ c.curr_team.league.sport }}</li>
+		{% endfor %}
+
+		<h1>Sophia Teams</h1>
+		{% for c in teams_sophia %}
+			<li>{{ c.location}} {{ c.team_name }}</li>
+		{% endfor %}
+
+		<h1>Sophia Leagues</h1>
+		{% for c in leagues_sophia %}
+			<li>{{ c.name }}</li>
+		{% endfor %}
+
+		<h1>Flores</h1>
+		{% for c in flores %}
+			<li>{{ c.first_name}} {{c.last_name}}</li>
+		{% endfor %}
+
+		<h1>All Sam Evans Teams</h1>
+		{% for c in sam_evans %}
+			<li>{{c.location}} {{ c.team_name}}</li>
+		{% endfor %}
+
+		<h1>All Manitoba Tiger-Cat</h1>
+		{% for c in all_manitoba %}
+			<li>{{c.first_name}} {{ c.last_name}}</li>
+		{% endfor %}
+
+		<h1>Former Vikings</h1>
+		{% for c in former_vikings %}
+			<li>{{c.first_name}} {{ c.last_name}}</li>
+		{% endfor %}
+
+		<h1>Jacob Gray Former Teams</h1>
+		{% for c in jacob_gray_former %}
+			<li>{{c.location}} {{ c.team_name }}</li>
+		{% endfor %}
+
+		<h1>Joshuas Atlantic</h1>
+		{% for c in all_joshua %}
+			<li>{{c.first_name}} {{ c.last_name }}</li>
+		{% endfor %}
+
+		<h1>Twelve or More</h1>
+		{% for c in over_twelve %}
+			<li>{{c.location}} {{ c.team_name }}</li>
+		{% endfor %}
+
+		<h1>Sort by number of teams</h1>
+		{% for c in sort_by_num %}
+			<li>{{c.team_count}} - {{ c.first_name }} {{c.last_name}}</li>
+		{% endfor %}
+
+
+
+
+
+
+		<h1>Leagues</h1>
+		<ol>
+			{% for league in leagues %}
+				<li>{{league.name}}</li>
+			{% empty %}
+				<p>No leagues found.  Try <code>python manage.py loaddata data.json</code>, or, if that doesn't work, going <a href="{% url 'make_data' %}">here</a> (but be prepared to wait).</p>
+			{% endfor %}
+		</ol>
+		<h1>Teams</h1>
+		<ol>
+			{% for team in teams %}
+				<li>{{team.location}} {{team.team_name}}</li>
+			{% empty %}
+				<p>No teams found.  Try <code>python manage.py loaddata data.json</code>, or, if that doesn't work, going <a href="{% url 'make_data' %}">here</a> (but be prepared to wait).</p>
+			{% endfor %}
+		</ol>
+		<h1>Players</h1>
+		<ol>
+			{% for player in players %}
+				<li>{{player.first_name}} {{player.last_name}}</li>
+			{% empty %}
+				<p>No teams found.  Try <code>python manage.py loaddata data.json</code>, or, if that doesn't work, going <a href="{% url 'make_data' %}">here</a> (but be prepared to wait).</p>
+			{% endfor %}
+		</ol>
+	</body>
+</html>
