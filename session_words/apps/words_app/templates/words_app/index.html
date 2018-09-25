@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Session Words</title>
+
+    <style>
+    .row {
+        display: flex;
+    }
+
+    .column {
+        flex: 50%;
+    }
+
+    div {
+        margin: 10px;
+    }
+
+    .green {
+        color:green;
+    }
+
+    .red {
+        color: red;
+    }
+
+    .blue {
+        color:blue;
+    }
+
+    .default
+        {color: black;
+    }
+
+    .big {
+        font-style: bold;
+    }
+
+
+    </style>
+    
+
+</head>
+<body>
+    <div class="row">
+
+    <div class="column">
+    <h1>Add a new word</h1>
+
+    <form action = "/add_session" method = 'post'>
+        {% csrf_token %}
+    <div><input type="text" name='word'></div>
+
+    <div><input type="radio" name="color" value="red" checked>Red</div>
+    <div><input type="radio" name="color" value="green">Green</div>
+    <div><input type="radio" name="color" value="blue">Blue</div>
+
+    <div>
+        <input type="hidden" name = "big_font" value="p">
+        <input type='checkbox' name='big_font' value='h1'>Show in BIG fonts!
+    </div>
+
+    <div>
+        <input type="submit" value="Add to Session">
+    </div>
+
+
+    </form>
+    </div>
+
+    <div class="column">
+
+        <form action="/clear" method='post'>
+                {% csrf_token %}
+            <input type="submit" value="Clear Session">
+        
+        <div>
+           
+        <!-- <p> {{ request.session.word }} - Added at {{ request.session.time }}</p> -->
+
+        {% for i in request.session.all reversed %}
+           <{{i.font}} <p class="{{i.color}}"> {{ i.word }} - Added at {{ i.time }} </p>
+            </{{i.font}}>
+           {% endfor %}
+   
+
+        </div>
+
+
+
+        </form>
+
+
+
+
+    </div>
+
+
+
+    </div>
+</body>
+</html>
